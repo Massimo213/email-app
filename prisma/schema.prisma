@@ -9,12 +9,13 @@ datasource db {
     provider = "postgresql"
     url      = env("DATABASE_URL")
 }
-
-model Post {
-    id        Int      @id @default(autoincrement())
-    name      String
-    createdAt DateTime @default(now())
-    updatedAt DateTime @updatedAt
-
-    @@index([name])
+model User {
+  id          String   @id @default(uuid())
+  emailAdress String   @unique
+  firstName   String
+  lastName    String
+  imageUrl    String?
 }
+
+
+
