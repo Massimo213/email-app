@@ -1,7 +1,8 @@
-
-import { Button } from "@/components/ui/button";
+'use client '
+import LinkAccountButton from "@/components/link-account-button";
+import MailDashboard from "./mail/page";
 
 export default async function Home() {
- return <h1>Hello</h1>
+ return <MailDashboard/>
 }
  
