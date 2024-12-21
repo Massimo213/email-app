@@ -18,7 +18,7 @@ return `https://api.aurinko.io/v1/auth/authorize?${params.toString()}`
 //Create a method that is going to exchang the code into a token
 export const exchangeCodeForAccessToken =async (code:string)=>{
   try{
-    //this url may be incorrect 
+    
 const response =await axios.post(`https://api.aurinko.io/v1/auth/token/${code}`,{}, {
   auth:{
     username:process.env.AURINKO_CLIENT_ID as string,

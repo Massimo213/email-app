@@ -1,4 +1,4 @@
-'use client'
+'use client';
 import React from "react";
 import {
   ResizableHandle,
@@ -10,18 +10,13 @@ import { cn } from "@/lib/utils";
 import { Separator } from "@/components/ui/separator";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { AccountSwitcher } from "./account-switcher";
-//Remarks and Notes on the Code:
-//- We're Using Resizalble to be able to SPlit the screen into a lots of part a part for NavBar , main context ,and others
-//- Use items-stretch to stretch items to fill the container’s cross axis
-//on the line using '&&' it works as evaluatingthe left-hand-side then return the right-hand-side if the left-hand-side is true
-//Separator is used to separate btw components s for or case it's used to separate btw sidebar emails and main content.
-
+import Sidebar from "./sidebar";
+import  ThreadList  from './thread-list'
 interface Props {
   defaultLayout: number[] | undefined;
   defaultCollapsed?: boolean;
   navCollapsedSize: number;
 }
-
 const Mail = ({ defaultLayout = [20, 32, 40], navCollapsedSize }: Props) => {
   const [isCollapsed, setIsCollapsed] = React.useState(false); // Accessed via React object
   // writing as a withhold for the futur to prevent the code to be lost :
@@ -51,17 +46,17 @@ const Mail = ({ defaultLayout = [20, 32, 40], navCollapsedSize }: Props) => {
               "min-w-[50px] transition-all duration-300 ease-in-out",
           )}
         >
-          <div className="flex-clo flex h-full flex-1">
+          <div className=" flex flex-col h-full flex-1">
             <div
               className={cn(
                 "flex h-[52px] items-center justify-between px-4",
                 isCollapsed ? "h-[52px]" : "px-2",
               )}
             >
-              <AccountSwitcher isCollapsed={isCollapsed}></AccountSwitcher>
+              <AccountSwitcher isCollapsed={isCollapsed}/>
             </div>
             <Separator />
-            Sidebar
+            <Sidebar isCollapsed={isCollapsed}/>
             <div className="flex-1"></div>
             Ask AI
           </div>
@@ -76,27 +71,31 @@ const Mail = ({ defaultLayout = [20, 32, 40], navCollapsedSize }: Props) => {
                 <TabsTrigger
                   value="inbox"
                   className="text-zinc-600 dark:text-zinc-200"
-                >Inbox</TabsTrigger>
-              <TabsTrigger
+                >
+                  Inbox
+                </TabsTrigger>
+                <TabsTrigger
                   value="done"
                   className="text-zinc-600 dark:text-zinc-200"
-                >Done</TabsTrigger>
+                >
+                  Done 
+                </TabsTrigger>
               </TabsList>
             </div>
             {/* Search Content */}
-            Search Bar 
-            <TabsContent value='inbox'>
-              inbox
-            </TabsContent>
-            <TabsContent value='done'>
-              done
-            </TabsContent>
+            Search Bar
+            <TabsContent value="inbox">
+              <ThreadList/>
+              </TabsContent>
+            <TabsContent value="done">
+              <ThreadList/>
+              </TabsContent>
           </Tabs>
         </ResizablePanel>
         <ResizableHandle withHandle />
-        <ResizablePanel defaultSize={(defaultLayout[2])} minSize={30}>
+        <ResizablePanel defaultSize={defaultLayout[2]} minSize={30}>
           thread display
-        </ResizablePanel>
+        </ResizablePanel> 
       </ResizablePanelGroup>
     </TooltipProvider>
   );
