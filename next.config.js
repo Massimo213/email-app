@@ -1,19 +1,14 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  images: {
-    remotePatterns: [
-      {
-        hostname: "lh3.googleusercontent.com",
-      },
-    ],
-  },
-  typescript: { 
+  reactStrictMode: true, // Optional: Keeps React in strict mode for development
+  typescript: {
+    // Ignores TypeScript errors during build
     ignoreBuildErrors: true,
   },
   eslint: {
+    // Ignores ESLint errors during build
     ignoreDuringBuilds: true,
   },
-  reactStrictMode: false,
 };
 
-export default nextConfig;
+module.exports = nextConfig;
